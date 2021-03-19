@@ -28,7 +28,8 @@ export const getTemperaturePlotingHistory = createSelector(
                     backgroundColor:[
                         '#fff0'
                     ],
-                    borderWidth: 4
+                    borderWidth: 4,
+                    pointRadius:0
                 }
             ]
         };

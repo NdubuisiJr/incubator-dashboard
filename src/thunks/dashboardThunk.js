@@ -2,7 +2,9 @@
 import{ 
     TEMPERATURE_TOPIC, TemperatureReceived,
     HUMIDITY_TOPIC, HumidityReceived,
-    FAN_SPEED_TOPIC, FanSpeedReceived
+    FAN_SPEED_TOPIC, FanSpeedReceived,
+    INPUT_VOLTAGE_TOPIC, InputVoltageReceived,
+    OUTPUT_VOLTAGE_TOPIC, outputVoltageReceived
 } from '../actions/dashboardAction';
 
 export const connectToMachine = () => async dispatch => {
@@ -32,6 +34,12 @@ const connectToMqttBroker = dispatch => {
                 return dispatch(HumidityReceived(data));
             case FAN_SPEED_TOPIC:
                 return dispatch(FanSpeedReceived(data));
+            case INPUT_VOLTAGE_TOPIC:
+                console.log(message.destinationName);
+                return dispatch(InputVoltageReceived(data));
+            case OUTPUT_VOLTAGE_TOPIC:
+                console.log(message.destinationName);
+                return dispatch(outputVoltageReceived(data));
             default:
                 break;
         }
@@ -46,5 +54,7 @@ const connectToMqttBroker = dispatch => {
         client.subscribe(TEMPERATURE_TOPIC);
         client.subscribe(HUMIDITY_TOPIC);
         client.subscribe(FAN_SPEED_TOPIC);
+        client.subscribe(INPUT_VOLTAGE_TOPIC);
+        client.subscribe(OUTPUT_VOLTAGE_TOPIC);
     }
 };

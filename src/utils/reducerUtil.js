@@ -11,3 +11,8 @@ export const addReceivedData = (state, payload) =>{
         ]
     };
 };
+
+export const interpolate = (min, max, mid) => {
+    console.log( (1 - ((max-mid)/(max-min))).toFixed(2));
+    return (1 - ((max-mid)/(max-min))).toFixed(2);
+};

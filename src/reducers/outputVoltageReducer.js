@@ -1,22 +1,25 @@
 
+import { OUTPUTVOLTAGE_RECEIVED  } from '../actions/dashboardAction'; 
+import {  addReceivedData } from '../utils/reducerUtil';
+
+
 const initialState = {
     current: {
-        name: 'Output Voltage',
-        value: 10,
-        unit: 'V'
+        name: 'Input Voltage',
+        value: 0,
+        unit: 'v'
     },
-    history: [
-        { time:'1/12021',value:11 },
-        { time:'2/12021',value:18 },
-        { time:'3/12021',value:9 },
-        { time:'4/12021',value:13 },
-        { time:'5/12021',value:12 },
-        { time:'6/12021',value:19 }
-    ]
+    history: []
 };
 
 export const outputoltageContext = (state =initialState , action) => {
-    if(action)
-        return state;
-    return state;
+    const { type, payload} = action; 
+    switch (type) {
+        case OUTPUTVOLTAGE_RECEIVED: {
+            return addReceivedData(state, payload);
+        }
+
+        default:
+            return state;
+    }
 };

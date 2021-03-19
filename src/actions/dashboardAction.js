@@ -18,3 +18,17 @@ export const FanSpeedReceived = data =>({
     type: FANSPEED_DATA_RECEIVED,
     payload: { data }
 });
+
+export const INPUT_VOLTAGE_TOPIC = 'Sonic-Labs-Incubator-InputVoltage';
+export const INPUTVOLTAGE_RECEIVED = 'Input voltage received';
+export const InputVoltageReceived = data =>({
+    type: INPUTVOLTAGE_RECEIVED,
+    payload: { data }
+});
+
+export const OUTPUT_VOLTAGE_TOPIC = 'Sonic-Labs-Incubator-OutputVoltage';
+export const OUTPUTVOLTAGE_RECEIVED = 'Output voltage received';
+export const outputVoltageReceived = data =>({
+    type: OUTPUTVOLTAGE_RECEIVED,
+    payload: { data }
+});

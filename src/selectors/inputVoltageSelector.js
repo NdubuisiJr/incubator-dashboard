@@ -1,14 +1,16 @@
 import {createSelector} from 'reselect';
+import { interpolate } from '../utils/reducerUtil';
 
 export const getCurrentInputVoltage = state => state.inputVoltageContext.current;
 export const getInputVoltageHistory = state => state.inputVoltageContext.history;
 
 export const getInputVoltagePlotingHistory = createSelector(
-    () => {
+    getCurrentInputVoltage,
+    current => {
         return {
             animate:true,
             nrOfLevels:15,
-            percent:0.56,//to be calculated
+            percent:Number(interpolate(100, 220, current.value)),//to be calculated
             needleColor:'#F49D37',
         };
     }
