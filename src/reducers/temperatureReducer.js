@@ -3,6 +3,7 @@ import { addReceivedData } from '../utils/reducerUtil';
 
 
 const initialState = {
+    reference:37,
     current: {
         name: 'Temperature',
         value: 0,
