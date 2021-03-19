@@ -35,10 +35,8 @@ const connectToMqttBroker = dispatch => {
             case FAN_SPEED_TOPIC:
                 return dispatch(FanSpeedReceived(data));
             case INPUT_VOLTAGE_TOPIC:
-                console.log(message.destinationName);
                 return dispatch(InputVoltageReceived(data));
             case OUTPUT_VOLTAGE_TOPIC:
-                console.log(message.destinationName);
                 return dispatch(outputVoltageReceived(data));
             default:
                 break;

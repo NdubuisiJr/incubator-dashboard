@@ -4,7 +4,6 @@ import propTypes from 'prop-types';
 const Footer = ({setHeight, refresh}) => {
     const footerRef = useRef();
     useEffect(()=>{
-        console.log('got here');
         setHeight(footerRef.current.offsetTop);
     },[refresh]);
     return (
