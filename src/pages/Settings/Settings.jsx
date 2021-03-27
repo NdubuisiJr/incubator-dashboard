@@ -23,11 +23,11 @@ const Settings = ({
     };
 
     const humChanged = e => {
-        setHum(e.target.value);
+        setHum(Number(e.target.value));
     };
 
     const tempChanged = e => {
-        setTemp(e.target.value);
+        setTemp(Number(e.target.value));
     };
 
     return (

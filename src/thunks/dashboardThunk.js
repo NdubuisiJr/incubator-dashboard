@@ -7,8 +7,8 @@ import{
     FAN_SPEED_TOPIC, FanSpeedReceived,
     INPUT_VOLTAGE_TOPIC, InputVoltageReceived,
     OUTPUT_VOLTAGE_TOPIC, outputVoltageReceived,
-    TemperatureReference,
-    HumidityReference
+    TEMPERATURE_RECIEVE_TOPIC, TemperatureReference,
+    HUMIDITY_RECIEVE_TOPIC, HumidityReference
 } from '../actions/dashboardAction';
 
 export const connectToMachine = () => async dispatch => {
@@ -28,8 +28,7 @@ export const applyChanges = (temp, hum) => dispatch => {
             time: new Date().toLocaleTimeString()
         };
         const message = new Paho.MQTT.Message(JSON.stringify(tempData));
-        message.destinationName = TEMPERATURE_TOPIC;
-        message.qos = 0;
+        message.destinationName = TEMPERATURE_RECIEVE_TOPIC;
         client.send(message);
 
         const humData = {
@@ -39,14 +38,13 @@ export const applyChanges = (temp, hum) => dispatch => {
             time: new Date().toLocaleTimeString()
         };
         const message2 = new Paho.MQTT.Message(JSON.stringify(humData));
-        message2.destinationName = HUMIDITY_TOPIC;
-        message2.qos = 0;
+        message2.destinationName = HUMIDITY_RECIEVE_TOPIC;
         client.send(message2);
 
         dispatch(TemperatureReference(temp));
         dispatch(HumidityReference(hum));
     } catch (error) {
-        console.log(err);
+        console.log(error);
     }
 };
 

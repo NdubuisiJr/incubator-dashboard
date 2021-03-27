@@ -20,7 +20,7 @@ export const HumidityReceived = data =>({
 
 export const HUMIDITY_DATA_REFERENCE = 'Humidity received reference';
 export const HumidityReference = data =>({
-    type: HUMIDITY_DATA_RECEIVED,
+    type: HUMIDITY_DATA_REFERENCE,
     payload: { data }
 });
 
@@ -44,3 +44,6 @@ export const outputVoltageReceived = data =>({
     type: OUTPUTVOLTAGE_RECEIVED,
     payload: { data }
 });
+
+export const TEMPERATURE_RECIEVE_TOPIC = 'Sonic-Labs-Incubator-Temperature-Recieve';
+export const HUMIDITY_RECIEVE_TOPIC = 'Sonic-Labs-Incubator-Humidity-Recieve';

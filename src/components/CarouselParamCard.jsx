@@ -72,7 +72,7 @@ const CarouselParamCard = ({histories}) => {
                                 ]
                             }
                         }}/>
-                        <Line data={histories[2]} options={{
+                        <Line data={histories[3]} options={{
                             legend:{
                                 display:true
                             } ,
@@ -103,7 +103,7 @@ const CarouselParamCard = ({histories}) => {
                                 ]
                             }
                         }}/>
-                        <Line data={histories[3]} options={{
+                        <Line data={histories[2]} options={{
                             legend:{
                                 display:true
                             } ,
