@@ -1,4 +1,4 @@
-import { HUMIDITY_DATA_RECEIVED } from '../actions/dashboardAction'; 
+import { HUMIDITY_DATA_RECEIVED, HUMIDITY_DATA_REFERENCE } from '../actions/dashboardAction'; 
 import {  addReceivedData } from '../utils/reducerUtil';
 
 const initialState = {
@@ -18,6 +18,13 @@ export const humidityContext = (state =initialState , action) => {
             return addReceivedData(state, payload);
         }
 
+        case HUMIDITY_DATA_REFERENCE: {
+            const { data } = payload;   
+            state.reference = data;
+            return {
+                ...state
+            };
+        }
         default:
             return state;
     }

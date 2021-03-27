@@ -5,9 +5,21 @@ export const TemperatureReceived = data =>({
     payload: { data }
 });
 
+export const TEMP_DATA_REFERENCE = 'Temperature received constant';
+export const TemperatureReference = data =>({
+    type: TEMP_DATA_REFERENCE,
+    payload: { data }
+});
+
 export  const HUMIDITY_TOPIC = 'Sonic-Labs-Incubator-Humidity';
 export const HUMIDITY_DATA_RECEIVED = 'Humidity received';
 export const HumidityReceived = data =>({
+    type: HUMIDITY_DATA_RECEIVED,
+    payload: { data }
+});
+
+export const HUMIDITY_DATA_REFERENCE = 'Humidity received reference';
+export const HumidityReference = data =>({
     type: HUMIDITY_DATA_RECEIVED,
     payload: { data }
 });

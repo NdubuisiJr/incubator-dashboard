@@ -1,4 +1,4 @@
-import { TEMP_DATA_RECEIVED } from '../actions/dashboardAction';
+import { TEMP_DATA_RECEIVED, TEMP_DATA_REFERENCE } from '../actions/dashboardAction';
 import { addReceivedData } from '../utils/reducerUtil';
 
 
@@ -17,6 +17,14 @@ export const temperatureContext = (state =initialState , action) => {
     switch (type) {
         case TEMP_DATA_RECEIVED: {
             return addReceivedData(state, payload);
+        }
+
+        case TEMP_DATA_REFERENCE: {
+            const { data } = payload;   
+            state.reference = data;
+            return {
+                ...state
+            };
         }
 
         default:
