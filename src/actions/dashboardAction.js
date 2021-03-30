@@ -47,3 +47,6 @@ export const outputVoltageReceived = data =>({
 
 export const TEMPERATURE_RECIEVE_TOPIC = 'Sonic-Labs-Incubator-Temperature-Recieve';
 export const HUMIDITY_RECIEVE_TOPIC = 'Sonic-Labs-Incubator-Humidity-Recieve';
+export const P_RECIEVE_TOPIC = 'Sonic-Labs-Incubator-P-Recieve';
+export const I_RECIEVE_TOPIC = 'Sonic-Labs-Incubator-I-Recieve';
+export const D_RECIEVE_TOPIC = 'Sonic-Labs-Incubator-D-Recieve';

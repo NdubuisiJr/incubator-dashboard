@@ -8,7 +8,8 @@ import{
     INPUT_VOLTAGE_TOPIC, InputVoltageReceived,
     OUTPUT_VOLTAGE_TOPIC, outputVoltageReceived,
     TEMPERATURE_RECIEVE_TOPIC, TemperatureReference,
-    HUMIDITY_RECIEVE_TOPIC, HumidityReference
+    HUMIDITY_RECIEVE_TOPIC, HumidityReference,
+    P_RECIEVE_TOPIC, I_RECIEVE_TOPIC, D_RECIEVE_TOPIC
 } from '../actions/dashboardAction';
 
 export const connectToMachine = () => async dispatch => {
@@ -19,7 +20,7 @@ export const connectToMachine = () => async dispatch => {
     }
 };
 
-export const applyChanges = (temp, hum) => dispatch => {
+export const applyChanges = (temp, hum, p, i, d) => dispatch => {
     try {
         const tempData = {
             name:'Temperature',
@@ -40,6 +41,36 @@ export const applyChanges = (temp, hum) => dispatch => {
         const message2 = new Paho.MQTT.Message(JSON.stringify(humData));
         message2.destinationName = HUMIDITY_RECIEVE_TOPIC;
         client.send(message2);
+
+        const pData = {
+            name: 'p',
+            value: p,
+            unit: '',
+            time: new Date().toLocaleTimeString()
+        };
+        const message3 = new Paho.MQTT.Message(JSON.stringify(pData));
+        message3.destinationName = P_RECIEVE_TOPIC;
+        client.send(message3);
+
+        const iData = {
+            name: 'i',
+            value: i,
+            unit: '',
+            time: new Date().toLocaleTimeString()
+        };
+        const message4 = new Paho.MQTT.Message(JSON.stringify(iData));
+        message4.destinationName = I_RECIEVE_TOPIC;
+        client.send(message4);
+
+        const dData = {
+            name: 'd',
+            value: d,
+            unit: '',
+            time: new Date().toLocaleTimeString()
+        };
+        const message5 = new Paho.MQTT.Message(JSON.stringify(dData));
+        message5.destinationName = D_RECIEVE_TOPIC;
+        client.send(message5);
 
         dispatch(TemperatureReference(temp));
         dispatch(HumidityReference(hum));
