@@ -22,53 +22,23 @@ export const connectToMachine = () => async dispatch => {
 
 export const applyChanges = (temp, hum, p, i, d) => dispatch => {
     try {
-        const tempData = {
-            name:'Temperature',
-            value: temp,
-            unit: '°C',
-            time: new Date().toLocaleTimeString()
-        };
-        const message = new Paho.MQTT.Message(JSON.stringify(tempData));
+        const message = new Paho.MQTT.Message(`${temp}`);
         message.destinationName = TEMPERATURE_RECIEVE_TOPIC;
         client.send(message);
 
-        const humData = {
-            name: 'Humidity',
-            value: hum,
-            unit: 'g/m3',
-            time: new Date().toLocaleTimeString()
-        };
-        const message2 = new Paho.MQTT.Message(JSON.stringify(humData));
+        const message2 = new Paho.MQTT.Message(`${hum}`);
         message2.destinationName = HUMIDITY_RECIEVE_TOPIC;
         client.send(message2);
 
-        const pData = {
-            name: 'p',
-            value: p,
-            unit: '',
-            time: new Date().toLocaleTimeString()
-        };
-        const message3 = new Paho.MQTT.Message(JSON.stringify(pData));
+        const message3 = new Paho.MQTT.Message(`${p}`);
         message3.destinationName = P_RECIEVE_TOPIC;
         client.send(message3);
 
-        const iData = {
-            name: 'i',
-            value: i,
-            unit: '',
-            time: new Date().toLocaleTimeString()
-        };
-        const message4 = new Paho.MQTT.Message(JSON.stringify(iData));
+        const message4 = new Paho.MQTT.Message(`${i}`);
         message4.destinationName = I_RECIEVE_TOPIC;
         client.send(message4);
 
-        const dData = {
-            name: 'd',
-            value: d,
-            unit: '',
-            time: new Date().toLocaleTimeString()
-        };
-        const message5 = new Paho.MQTT.Message(JSON.stringify(dData));
+        const message5 = new Paho.MQTT.Message(`${d}`);
         message5.destinationName = D_RECIEVE_TOPIC;
         client.send(message5);
 
@@ -89,6 +59,7 @@ const connectToMqttBroker = dispatch => {
 
     client.onMessageArrived =  message => {
         const data = JSON.parse(message.payloadString);
+        console.log(data);
         switch (message.destinationName) {
             case TEMPERATURE_TOPIC:
                 return dispatch(TemperatureReceived(data));

@@ -10,7 +10,7 @@ export const getOutputVoltagePlotingHistory = createSelector(
         return {
             animate:true,
             nrOfLevels:15,
-            percent: Number(interpolate(100, 220, current.value)),//to be calculated
+            percent: Number(interpolate(0, 300, current.value)),//to be calculated
             needleColor:'#E9D2F4',
         };
     }
