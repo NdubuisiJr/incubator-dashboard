@@ -17,9 +17,9 @@ export const interpolate = (min, max, mid) => {
 };
 
 const millisToMinutesAndSeconds = (millis) => {
-    var minutes = Math.floor(millis / 60000);
-    const hours = minutes / 60;
-    const days = hours / 24;
+    var minutes = Math.floor(millis / 60000).toFixed(1);
+    const hours = (minutes / 60).toFixed(1);
+    const days = (hours / 24).toFixed(1);
 
     return days > 0 ? `${days} d : ${hours} hrs`: `${hours} hrs : ${minutes} min` ;
 };

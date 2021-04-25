@@ -55,11 +55,14 @@ const connectToMqttBroker = dispatch => {
 
     client.onConnectionLost =  responseObject => {
         console.log('Connection Lost: ' + responseObject.errorMessage);
+        setTimeout(() => {
+            console.log('reconnecting...');
+            connectToMqttBroker(dispatch);
+        }, 5000);
     };
 
     client.onMessageArrived =  message => {
         const data = JSON.parse(message.payloadString);
-        console.log(data);
         switch (message.destinationName) {
             case TEMPERATURE_TOPIC:
                 return dispatch(TemperatureReceived(data));
