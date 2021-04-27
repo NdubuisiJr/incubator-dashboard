@@ -15,16 +15,17 @@ export const getHumidityPlotingHistory = createSelector(
             datasets:[
                 {
                     label:'Humidity',
-                    data: history.map(his=>his.value),
+                    borderColor: '#4FB0C6',
+                    data: history.map(his=>his.value),//
                     backgroundColor:[
-                        '#4FB0C6'
+                        '#fff0'
                     ],
                     borderWidth: 4
                 },
                 {
                     label: 'Reference',
                     data: history.map(his=>reference),
-                    borderColor: '#4FB0C6',
+                    borderColor: '#D5A021',
                     backgroundColor:[
                         '#fff0'
                     ],

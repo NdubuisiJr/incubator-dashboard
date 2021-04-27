@@ -9,7 +9,7 @@ const CarouselParamCard = ({histories}) => {
         <div className="col-md-12 grid-margin stretch-card">
             <div className="card">
                 <div className="card-body pb-0">
-                    <Carousel showThumbs={false} showArrows={true}>
+                    <Carousel showThumbs={false} showArrows={true} autoPlay={true} interval={5000}>
                         <Line data={histories[0]} options={{
                             legend:{
                                 display:true

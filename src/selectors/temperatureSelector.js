@@ -16,15 +16,16 @@ export const getTemperaturePlotingHistory = createSelector(
                 {
                     label:'Temperature',
                     data: history.map(his=>his.value),
+                    borderColor: '#7880B5',
                     backgroundColor:[
-                        '#744FC6'
+                        '#fff0'
                     ],
                     borderWidth: 4
                 },
                 {
                     label: 'Reference',
                     data: history.map(his=>reference),
-                    borderColor: '#744FC6',
+                    borderColor: '#D5A021',
                     backgroundColor:[
                         '#fff0'
                     ],

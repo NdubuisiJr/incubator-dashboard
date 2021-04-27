@@ -4,8 +4,10 @@ import NavBar from './components/navBar';
 import SideBar from './components/sideBar';
 import Dashboard from './pages/Dashboard/Dashboard';
 import Settings from './pages/Settings/Settings';
-import './app.css';
+import ReactNotification from 'react-notifications-component';
 import Footer from './components/footer';
+import './app.css';
+import 'react-notifications-component/dist/theme.css';
 
 const App = () =>{
 
@@ -14,6 +16,7 @@ const App = () =>{
 
     return(
         <div className='app'>
+            <ReactNotification/>
             <BrowserRouter>
                 <NavBar/>
                 <SideBar height={height} setRefresh={setRefresh}/>

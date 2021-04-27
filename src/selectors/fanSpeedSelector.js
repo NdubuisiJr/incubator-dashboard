@@ -12,9 +12,10 @@ export const getFanPlotingHistory = createSelector(
             datasets:[
                 {
                     label:'Fan Speed',
-                    data: history.map(his=>his.value),
+                    data: history.map(his=>his.value), //D5A021
+                    borderColor:'#6A5D7B',
                     backgroundColor:[
-                        '#379392'
+                        '#fff0'
                     ],
                     borderWidth: 4
                 }

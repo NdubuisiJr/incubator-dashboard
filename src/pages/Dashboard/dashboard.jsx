@@ -30,7 +30,7 @@ const Dashboard = ({
         combined.datasets=[historyHumidity.datasets[0], fanspeedHistory.datasets[0], historyTemperature.datasets[0]].map(d=>{
             return {
                 ...d,
-                borderColor:d.backgroundColor[0],
+                borderColor:d.borderColor,
                 backgroundColor:['#fff0'],
             };
         });

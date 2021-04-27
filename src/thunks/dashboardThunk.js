@@ -11,6 +11,7 @@ import{
     HUMIDITY_RECIEVE_TOPIC, HumidityReference,
     P_RECIEVE_TOPIC, I_RECIEVE_TOPIC, D_RECIEVE_TOPIC
 } from '../actions/dashboardAction';
+import { store } from 'react-notifications-component';
 
 export const connectToMachine = () => async dispatch => {
     try {
@@ -51,37 +52,80 @@ export const applyChanges = (temp, hum, p, i, d) => dispatch => {
 
 // connection helper
 const connectToMqttBroker = dispatch => {
-    client = new Paho.MQTT.Client('broker.mqttdashboard.com', Number(8000), '/mqtt', '');
+    try {
+        client = new Paho.MQTT.Client('broker.mqttdashboard.com', Number(8000), '/mqtt', '');
 
-    client.onConnectionLost =  responseObject => {
-        console.log('Connection Lost: ' + responseObject.errorMessage);
-        setTimeout(() => {
-            console.log('reconnecting...');
-            connectToMqttBroker(dispatch);
-        }, 5000);
-    };
+        client.onConnectionLost =  responseObject => {
+            console.log('Connection Lost: ' + responseObject.errorMessage);
+            store.addNotification({
+                title: '',
+                message: 'Connection Lost',
+                type: 'danger',
+                insert: 'top',
+                container: 'top-right',
+                animationIn: ['animated', 'fadeIn'],
+                animationOut: ['animated', 'fadeOut'],
+                dismiss: {
+                    duration: 3000,
+                    onScreen: true,
+                },
+            });
+            setTimeout(() => {
+                console.log('reconnecting...');
+                store.addNotification({
+                    title: '',
+                    message: 'Reconnecting...',
+                    type: 'success',
+                    insert: 'top',
+                    container: 'top-right',
+                    animationIn: ['animated', 'fadeIn'],
+                    animationOut: ['animated', 'fadeOut'],
+                    dismiss: {
+                        duration: 3000,
+                        onScreen: true,
+                    },
+                });
+                connectToMqttBroker(dispatch);
+            }, 5000);
+        };
 
-    client.onMessageArrived =  message => {
-        const data = JSON.parse(message.payloadString);
-        switch (message.destinationName) {
-            case TEMPERATURE_TOPIC:
-                return dispatch(TemperatureReceived(data));
-            case HUMIDITY_TOPIC:
-                return dispatch(HumidityReceived(data));
-            case FAN_SPEED_TOPIC:
-                return dispatch(FanSpeedReceived(data));
-            case INPUT_VOLTAGE_TOPIC:
-                return dispatch(InputVoltageReceived(data));
-            case OUTPUT_VOLTAGE_TOPIC:
-                return dispatch(outputVoltageReceived(data));
-            default:
-                break;
-        }
-    };
+        client.onMessageArrived =  message => {
+            const data = JSON.parse(message.payloadString);
+            switch (message.destinationName) {
+                case TEMPERATURE_TOPIC:
+                    return dispatch(TemperatureReceived(data));
+                case HUMIDITY_TOPIC:
+                    return dispatch(HumidityReceived(data));
+                case FAN_SPEED_TOPIC:
+                    return dispatch(FanSpeedReceived(data));
+                case INPUT_VOLTAGE_TOPIC:
+                    return dispatch(InputVoltageReceived(data));
+                case OUTPUT_VOLTAGE_TOPIC:
+                    return dispatch(outputVoltageReceived(data));
+                default:
+                    break;
+            }
+        };
 
-    client.connect({
-        onSuccess: onConnect
-    });
+        client.connect({
+            onSuccess: onConnect
+        });
+
+    } catch (error) {
+        store.addNotification({
+            title: '',
+            message: 'Unable to connect. Please refresh',
+            type: 'danger',
+            insert: 'top',
+            container: 'top-right',
+            animationIn: ['animated', 'fadeIn'],
+            animationOut: ['animated', 'fadeOut'],
+            dismiss: {
+                duration: 3000,
+                onScreen: true,
+            },
+        });
+    }
 
     function onConnect(){
         console.log('connected!!!');
@@ -90,5 +134,23 @@ const connectToMqttBroker = dispatch => {
         client.subscribe(FAN_SPEED_TOPIC);
         client.subscribe(INPUT_VOLTAGE_TOPIC);
         client.subscribe(OUTPUT_VOLTAGE_TOPIC);
+
+        try {
+            store.addNotification({
+                title: '',
+                message: 'Connected to server successfully',
+                type: 'success',
+                insert: 'top',
+                container: 'top-right',
+                animationIn: ['animated', 'fadeIn'],
+                animationOut: ['animated', 'fadeOut'],
+                dismiss: {
+                    duration: 3000,
+                    onScreen: true,
+                },
+            });
+        } catch (error) {
+            console.log(error);
+        }
     }
 };

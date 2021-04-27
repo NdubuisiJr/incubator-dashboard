@@ -21,6 +21,6 @@ const millisToMinutesAndSeconds = (millis) => {
     const hours = (minutes / 60).toFixed(1);
     const days = (hours / 24).toFixed(1);
 
-    return days > 0 ? `${days} d : ${hours} hrs`: `${hours} hrs : ${minutes} min` ;
+    return days > 0 ? `${days}d`: `${hours}hrs` ;
 };
    
